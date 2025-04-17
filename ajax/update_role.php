@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../includes/db.php'; 
+require '../php/db.php'; 
 
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     die("Ошибка: доступ запрещен.");

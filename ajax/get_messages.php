@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../includes/db.php';
+require '../php/db.php';
 
 if (isset($_GET['receiver_id'])) {
     $receiver_id = $_GET['receiver_id'];

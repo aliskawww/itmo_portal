@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-require '../includes/db.php'; 
+require '../php/db.php'; 
 
 if (!isset($_POST['review_id']) || !isset($_POST['profession_id'])) {
     header("Location: ../pages/professii.php");
