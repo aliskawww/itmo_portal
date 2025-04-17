@@ -1,12 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../pages/login.php");
-    exit();
-}
 
-require '../includes/db.php'; 
+
+require '../php/db.php'; 
 
 if (!isset($_GET['profession_id'])) {
     header("Location: ../pages/professii.php"); 
@@ -49,7 +46,7 @@ $stmt->close();
                         <p><?= htmlspecialchars($review['review']) ?></p>
                         <p><strong>Оценка:</strong> <?= $review['rating'] ?? 'Нет оценки' ?></p>
                         <small><?= $review['created_at'] ?></small>
-                        <?php if ($_SESSION['user_role'] === 'admin' || $_SESSION['user_id'] == $review['expert_id']): ?>
+                        <?php if (isset($_SESSION['user_role'])&&($_SESSION['user_role'] === 'admin' || $_SESSION['user_id'] == $review['expert_id'])): ?>
                             <form action="../ajax/deletereview.php" method="POST" style="display: inline;">
                                 <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
                                 <input type="hidden" name="profession_id" value="<?= $profession_id ?>">

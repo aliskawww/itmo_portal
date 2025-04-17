@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-require '../includes/db.php'; 
+require '../php/db.php'; 
 ?>;
 
 <!DOCTYPE html>

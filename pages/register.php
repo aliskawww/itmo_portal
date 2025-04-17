@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../includes/db.php'; 
+require '../php/db.php'; 
 
 $error_message = '';
 
@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     $email = trim($_POST['email']); 
-    $role = isset($_POST['role']) ? trim($_POST['role']) : 'user'; 
+    $role = isset($_POST['role']) ? trim($_POST['role']) : 'user';
+    $role_request = !empty($_POST['role_request']) ? $_POST['role_request'] : NULL;
     
 
     if (empty($username) || empty($password) || empty($email)) {
@@ -46,8 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($error_message)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        $stmt = $conn->prepare("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $username, $hashed_password, $email, $role);
+        // Записываем в БД
+$stmt = $conn->prepare("INSERT INTO users (username, email, password, request, role) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $username, $email, $hashed_password, $role_request, $role);
         
         if ($stmt->execute()) {
             header("Location: ../pages/registr.html");

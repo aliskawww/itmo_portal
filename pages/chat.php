@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../includes/db.php';
+require '../php/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../pages/registr.html"); 
