@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'user' && $_SESSI
     exit();
 }
 
-require '../includes/db.php';
+require '../php/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $expert_id = $_SESSION['user_id'];
